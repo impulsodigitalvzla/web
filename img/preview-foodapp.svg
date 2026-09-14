@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Vista previa FoodApp">
+  <rect width="640" height="400" rx="12" fill="#0d121b"/>
+  <rect x="24" y="160" width="300" height="170" rx="22" fill="#161d29" stroke="#1f2733" stroke-width="3"/>
+  <rect x="34" y="178" width="280" height="30" rx="8" fill="#0f141d"/>
+  <text x="174" y="197" font-family="monospace" font-size="13" fill="#8b949e" text-anchor="middle">12:30</text>
+  <circle cx="62" cy="205" r="22" fill="#3fb950"/>
+  <path d="M48 205l10 10 18-20" fill="none" stroke="#05150a" stroke-width="4"/>
+  <circle cx="286" cy="205" r="22" fill="#22d3ee"/>
+  <path d="M284 205h22M292 199l8 6-8 6" fill="none" stroke="#05150a" stroke-width="4"/>
+  <rect x="34" y="222" width="280" height="10" rx="5" fill="#1f2733"/>
+  <g>
+    <rect x="34" y="246" width="280" height="52" rx="8" fill="#0f141d" stroke="#1f2733"/>
+    <circle cx="58" cy="272" r="18" fill="#1f2733"/>
+    <rect x="84" y="258" width="120" height="10" rx="4" fill="#3fb950"/>
+    <rect x="84" y="274" width="90" height="8" rx="4" fill="#1f2733"/>
+  </g>
+  <g>
+    <rect x="34" y="306" width="280" height="16" rx="8" fill="#1f2733"/>
+  </g>
+  <rect x="356" y="60" width="260" height="280" rx="14" fill="#0f141d" stroke="#1f2733"/>
+  <rect x="380" y="92" width="90" height="14" rx="4" fill="#22d3ee"/>
+  <rect x="380" y="118" width="200" height="10" rx="4" fill="#1f2733"/>
+  <path d="M380 170 V300" stroke="#3fb950" stroke-width="3"/>
+  <path d="M380 170 H560" stroke="#3fb950" stroke-width="3"/>
+  <path d="M380 210 H540" stroke="#3fb950" stroke-width="3"/>
+  <path d="M380 250 H540" stroke="#3fb950" stroke-width="3"/>
+  <circle cx="560" cy="170" r="6" fill="#3fb950"/>
+  <text x="470" y="240" font-family="monospace" font-size="12" fill="#8b949e" text-anchor="middle">en camino...</text>
+</svg>
