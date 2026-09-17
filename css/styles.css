@@ -716,7 +716,7 @@ body { overflow-x: hidden; }
 }
 
 @media (max-width: 640px) {
-  p { text-align: center; }
+  p { text-align: left; }
   .hero-services li { font-size: 0.74rem; padding: 0.28rem 0.7rem; }
   .hero-sub { font-size: 0.95rem; }
   .portfolio-card figcaption { padding: 1.1rem 1.2rem 1.3rem; }
