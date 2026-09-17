@@ -558,7 +558,7 @@ img { max-width: 100%; display: block; }
 
 /* ---------- Mobile nav ---------- */
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 70px; }
 
 body { overflow-x: hidden; }
 
@@ -566,8 +566,8 @@ body { overflow-x: hidden; }
   .nav-toggle { display: flex; }
 
   .nav-links {
-    position: fixed;
-    top: 58px;
+    position: absolute;
+    top: 100%;
     left: 0;
     right: 0;
     flex-direction: column;
@@ -575,13 +575,19 @@ body { overflow-x: hidden; }
     background: var(--bg);
     border-bottom: 1px solid var(--border);
     box-shadow: var(--shadow);
-    transform: translateY(-120%);
-    transition: transform 0.3s ease;
-    max-height: calc(100dvh - 58px);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s;
+    max-height: calc(100dvh - 60px);
     overflow-y: auto;
   }
 
-  .nav-links.open { transform: translateY(0); }
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
 
   .nav-links a { padding: 1rem 1.5rem; border-top: 1px solid var(--border); }
 
@@ -638,6 +644,31 @@ body { overflow-x: hidden; }
   .nav-inner { padding: 0.7rem 0; }
   .footer { font-size: 0.78rem; padding: 1.6rem 0; }
   .tag { font-size: 0.68rem; }
+}
+
+@media (max-width: 420px) {
+  .container { padding: 0 0.15rem; }
+  .hero h1 { font-size: 1.42rem; }
+  .hero-sub { font-size: 0.92rem; }
+  .hero-services { gap: 0.4rem; }
+  .hero-services li { font-size: 0.72rem; padding: 0.26rem 0.65rem; }
+  .section-head h2 { font-size: 1.3rem; }
+  .service h3, .portfolio-card h3 { font-size: 0.95rem; }
+  .fullstack-title h3 { font-size: 1.05rem; }
+  .grid { gap: 1.1rem; }
+  .contact-grid { gap: 1.1rem; }
+  .logo { font-size: 0.95rem; }
+  .nav-links a { padding: 0.9rem 1.2rem; font-size: 0.88rem; }
+}
+
+@media (max-width: 360px) {
+  .hero { padding: 2.75rem 0 2.5rem; }
+  .hero h1 { font-size: 1.28rem; }
+  .section { padding: 2.5rem 0; }
+  .btn { font-size: 0.85rem; padding: 0.68rem 1rem; }
+  .eyebrow { letter-spacing: 0.1em; font-size: 0.68rem; }
+  .card-body p { font-size: 0.84rem; }
+  .footer { font-size: 0.74rem; }
 }
 
 input, textarea {
