@@ -67,6 +67,11 @@ p, h1, h2, h3, h4, h5, h6, span, li, label, a, strong, small {
   min-width: 0;
 }
 
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .container {
   width: min(var(--maxw), 100% - 2rem);
   margin-inline: auto;
@@ -157,6 +162,27 @@ p, h1, h2, h3, h4, h5, h6, span, li, label, a, strong, small {
 }
 
 .nav-cta { display: none; }
+
+.nav .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nav .nav-cta::before { content: none; }
+
+.nav .nav-cta .cta-text { display: none; }
+
+.nav .nav-cta .cta-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
 
 .nav-toggle span {
   width: 22px;
@@ -614,6 +640,8 @@ p, h1, h2, h3, h4, h5, h6, span, li, label, a, strong, small {
 
 .footer p::before { content: "// "; color: var(--accent); opacity: 0.6; }
 
+.footer p { text-align: center; }
+
 /* ---------- Mobile nav ---------- */
 
 html { -webkit-text-size-adjust: 100%; scroll-padding-top: 70px; }
@@ -646,7 +674,17 @@ body { overflow-x: hidden; }
 
   .nav-links a::before { content: "> "; color: var(--accent); opacity: 0.5; }
 
-  .nav-cta { display: inline-flex; }
+  .nav .nav-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: auto;
+    height: auto;
+    padding: 0.75rem 1.4rem;
+    border-radius: 8px;
+  }
+
+  .nav .nav-cta .cta-text { display: inline; }
 
   .hero { padding: 6rem 0 5rem; }
   .section { padding: 5rem 0; }
