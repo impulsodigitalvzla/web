@@ -721,21 +721,19 @@ body { overflow-x: hidden; }
 }
 
 @media (max-width: 640px) {
-  p, h1, h2, h3, h4, li, label, small, strong, span {
-    text-align: left;
-    text-justify: none;
-    text-align-last: auto;
-    text-wrap: initial;
-  }
-  .footer p, .form-note { text-align: left; }
+  p { text-align: left; }
   .hero-sub {
     text-align: justify;
     -webkit-hyphens: auto;
     hyphens: auto;
     hyphenate-limit-chars: 6 3 2;
   }
-  .fullstack-title p { text-align: justify; }
-  .section-desc { text-align: center; }
+  .footer p {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    hyphenate-limit-chars: 6 3 2;
+  }
   .hero-services li { font-size: 0.74rem; padding: 0.28rem 0.7rem; }
   .hero-sub { font-size: 0.95rem; }
   .portfolio-card figcaption { padding: 1.1rem 1.2rem 1.3rem; }
