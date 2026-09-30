@@ -9,6 +9,25 @@ var CONTACT = {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
+var themeToggle = document.getElementById("theme-toggle");
+
+if (themeToggle) {
+  if (localStorage.getItem("impulso-theme") === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
+
+  themeToggle.addEventListener("click", function () {
+    var isLight = document.documentElement.getAttribute("data-theme") === "light";
+    if (isLight) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("impulso-theme", "");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("impulso-theme", "light");
+    }
+  });
+}
+
 var navToggle = document.querySelector(".nav-toggle");
 var navLinks = document.querySelector(".nav-links");
 

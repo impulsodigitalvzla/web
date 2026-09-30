@@ -11,9 +11,11 @@
   --border: #1f2733;
   --radius: 10px;
   --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-  --shadow-hover: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(63, 185, 80, 0.35);
+  --shadow-hover: 0 16px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--accent-glow);
   --maxw: 1120px;
   --font: "JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  --nav-bg: rgba(10, 14, 20, 0.85);
+  --grid-line: rgba(63, 185, 80, 0.04);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,8 +47,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(63, 185, 80, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(63, 185, 80, 0.04) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 44px 44px;
   -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
   mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 75%);
@@ -90,7 +92,7 @@ p {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 14, 20, 0.85);
+  background: var(--nav-bg);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -800,3 +802,58 @@ input, textarea {
   appearance: none;
   border-radius: 8px;
 }
+
+/* ---------- Tema claro ---------- */
+
+html[data-theme="light"] {
+  --bg: #f6f8f7;
+  --bg-alt: #edf1ee;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --text-muted: #50605a;
+  --accent: #22a84a;
+  --accent-2: #067a8a;
+  --accent-dark: #1c8a3b;
+  --accent-glow: rgba(34, 168, 74, 0.14);
+  --border: #d5ded9;
+  --nav-bg: rgba(246, 248, 247, 0.9);
+  --grid-line: rgba(15, 23, 42, 0.05);
+}
+
+html[data-theme="light"] .hero {
+  background:
+    radial-gradient(600px 300px at 85% -10%, rgba(34, 168, 74, 0.12), transparent),
+    radial-gradient(500px 260px at 5% 110%, rgba(6, 122, 138, 0.07), transparent);
+}
+
+html[data-theme="light"] .hero-services li {
+  background: rgba(6, 122, 138, 0.06);
+  border-color: rgba(6, 122, 138, 0.28);
+}
+
+/* ---------- Botón tema claro/oscuro ---------- */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+.theme-toggle svg { width: 19px; height: 19px; }
+
+.theme-toggle .icon-sun { display: block; }
+.theme-toggle .icon-moon { display: none; }
+
+html[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: block; }
