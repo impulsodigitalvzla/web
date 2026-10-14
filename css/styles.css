@@ -107,6 +107,9 @@ p {
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.15;
@@ -115,7 +118,7 @@ p {
   text-shadow: 0 0 12px var(--accent-glow);
 }
 
-.logo::before { content: "~/"; color: var(--text-muted); }
+.logo-icon { width: 1.6em; height: 1.6em; flex-shrink: 0; }
 
 .nav-links {
   display: flex;
@@ -218,6 +221,8 @@ p {
 
 .btn:active { transform: translateY(1px); }
 
+.btn-icon { width: 1.05rem; height: 1.05rem; flex-shrink: 0; }
+
 .btn-primary {
   background: var(--accent);
   color: #05150a;
@@ -230,6 +235,8 @@ p {
 }
 
 .btn-primary::before { content: "./ "; opacity: 0.6; }
+
+.hero-actions .btn-primary::before { content: none; }
 
 .btn-outline {
   background: transparent;
