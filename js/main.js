@@ -3,54 +3,93 @@ var CONTACT = {
   brand: "Impulso Digital",
   whatsappNumber: "584140544880",
   whatsappDisplay: "+58 414 054 4880",
-  email: "cesarperez084@gmail.com",
-  clickToEdit: false
+  email: "cesarperez084@gmail.com"
 };
 
-document.getElementById("year").textContent = new Date().getFullYear();
-
-var themeToggle = document.getElementById("theme-toggle");
-
-if (themeToggle) {
-  if (localStorage.getItem("impulso-theme") === "light") {
-    document.documentElement.setAttribute("data-theme", "light");
-  }
-
-  themeToggle.addEventListener("click", function () {
-    var isLight = document.documentElement.getAttribute("data-theme") === "light";
-    if (isLight) {
-      document.documentElement.removeAttribute("data-theme");
-      localStorage.setItem("impulso-theme", "");
-    } else {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("impulso-theme", "light");
-    }
-  });
-}
-
-var navToggle = document.querySelector(".nav-toggle");
-var navLinks = document.querySelector(".nav-links");
-
-if (navToggle && navLinks) {
-  navToggle.addEventListener("click", function () {
-    navLinks.classList.toggle("open");
-  });
-
-  navLinks.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") {
-      navLinks.classList.remove("open");
-    }
-  });
-}
+var yearEl = document.getElementById("year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
   link.href = "https://wa.me/" + CONTACT.whatsappNumber;
 });
 
-var mailLinks = document.querySelectorAll('a[href^="mailto:"]');
-mailLinks.forEach(function (link) {
+document.querySelectorAll('a[href^="mailto:"]').forEach(function (link) {
   link.href = "mailto:" + CONTACT.email;
 });
+
+var header = document.getElementById("site-header");
+if (header) {
+  var onScroll = function () {
+    header.classList.toggle("scrolled", window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+var themeToggle = document.getElementById("theme-toggle");
+if (themeToggle) {
+  if (localStorage.getItem("impulso-theme") === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+  themeToggle.addEventListener("click", function () {
+    var isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    if (isDark) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("impulso-theme", "");
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("impulso-theme", "dark");
+    }
+  });
+}
+
+var navToggle = document.querySelector(".nav-toggle");
+var navMenu = document.querySelector(".nav-menu");
+
+if (navToggle && navMenu) {
+  var closeMenu = function () {
+    navMenu.classList.remove("open");
+    navToggle.classList.remove("active");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+
+  navToggle.addEventListener("click", function () {
+    var isOpen = navMenu.classList.toggle("open");
+    navToggle.classList.toggle("active", isOpen);
+    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  navMenu.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") closeMenu();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeMenu();
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 960) closeMenu();
+  });
+}
+
+var revealItems = document.querySelectorAll("[data-reveal]");
+
+if (revealItems.length) {
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    revealItems.forEach(function (item) { observer.observe(item); });
+  } else {
+    revealItems.forEach(function (item) { item.classList.add("in-view"); });
+  }
+}
 
 var form = document.getElementById("contact-form");
 if (form) {
@@ -69,48 +108,31 @@ if (form) {
   });
 }
 
-if (CONTACT.clickToEdit && window.confirm) {
-  var editBtn = document.createElement("button");
-  editBtn.id = "edit-datos";
-  editBtn.textContent = "Editar mis datos";
-  editBtn.style.cssText =
-    "position:fixed;bottom:16px;left:16px;z-index:999;font-family:inherit;" +
-    "font-size:0.8rem;font-weight:600;color:#fff;background:#171a23;border:0;" +
-    "border-radius:999px;padding:0.55rem 1rem;cursor:pointer;opacity:0.85;";
-  editBtn.title = "Actualiza tu nombre, WhatsApp y email";
+var copyBtn = document.getElementById("copy-email");
+if (copyBtn) {
+  copyBtn.addEventListener("click", function () {
+    var email = copyBtn.getAttribute("data-email") || CONTACT.email;
+    var label = copyBtn.querySelector("span");
+    var done = function () {
+      if (!label) return;
+      var original = label.textContent;
+      label.textContent = "¡Copiado!";
+      setTimeout(function () { label.textContent = original; }, 1800);
+    };
 
-  editBtn.addEventListener("click", function () {
-    var name = prompt("Tu nombre completo:", CONTACT.name);
-    if (name && name.trim()) CONTACT.name = name.trim();
-    var phone = prompt("Número de WhatsApp con código de país (ej: 573001234567):", CONTACT.whatsappNumber);
-    if (phone && phone.trim()) {
-      CONTACT.whatsappNumber = phone.trim().replace(/[^0-9]/g, "");
-      CONTACT.whatsappDisplay = "+" + CONTACT.whatsappNumber;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(done).catch(function () {});
+      return;
     }
-    var email = prompt("Tu email de contacto:", CONTACT.email);
-    if (email && email.trim()) CONTACT.email = email.trim().toLowerCase();
 
-    document.querySelectorAll(".logo").forEach(function (el) {
-      el.innerHTML = CONTACT.name.replace(" ", "<br>");
-    });
-    document.querySelector(".hero-sub strong").textContent = CONTACT.name;
-
-    document.querySelectorAll('a[href*="wa.me"]').forEach(function (link) {
-      link.href = "https://wa.me/" + CONTACT.whatsappNumber;
-    });
-    document.querySelectorAll(".contact-cta.wa p").forEach(function (p) {
-      p.textContent = CONTACT.whatsappDisplay;
-    });
-
-    mailLinks.forEach(function (link) {
-      link.href = "mailto:" + CONTACT.email;
-    });
-    document.querySelectorAll(".contact-cta:not(.wa) p").forEach(function (p) {
-      p.textContent = CONTACT.email;
-    });
-
-    alert("Listo. Tus datos se actualizaron.");
+    var temp = document.createElement("input");
+    temp.value = email;
+    temp.setAttribute("readonly", "");
+    temp.style.position = "absolute";
+    temp.style.left = "-9999px";
+    document.body.appendChild(temp);
+    temp.select();
+    try { document.execCommand("copy"); done(); } catch (err) {}
+    document.body.removeChild(temp);
   });
-
-  document.body.appendChild(editBtn);
 }
